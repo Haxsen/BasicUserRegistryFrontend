@@ -1,0 +1,9 @@
+FROM cypress/included:10.10.0
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm install
+
+CMD ["cypress", "run"]

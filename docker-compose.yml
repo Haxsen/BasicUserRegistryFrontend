@@ -1,0 +1,24 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    command: npm start
+    networks:
+      - my-network
+
+  cypress:
+    build:
+      context: .
+      dockerfile: ./dockerfile.cypress
+    depends_on:
+      - frontend
+    command: cypress run
+    environment:
+      - BASE_URL=https://172.20.0.2:3000
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
