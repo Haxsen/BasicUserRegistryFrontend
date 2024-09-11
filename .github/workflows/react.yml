@@ -20,10 +20,19 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_IMAGE_FRONTEND }} .
           docker push ${{ secrets.DOCKER_IMAGE_FRONTEND }}
-      - name: Deploy to Kubernetes
-        uses: kubernetes/deploy@v2
+      - name: Deploy to EKS
+        uses: aws-eks/deploy@v1
         with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-          deployment: my-app-frontend
-          container: my-app-frontend
+          cluster-name: BasicUserRegistryFrontendEKS
+          role-arn: ${{ secrets.EKS_IAM_ROLE_ARN }}
+          kubeconfig: ${{ secrets.EKS_KUBECONFIG }}
+          deployment: userregfrontenddeploy
+          container: userregfrontendcontainer
           image: ${{ secrets.DOCKER_IMAGE_FRONTEND }}
+      # - name: Deploy to Kubernetes
+      #   uses: kubernetes/deploy@v2
+      #   with:
+      #     kubeconfig: ${{ secrets.KUBECONFIG }}
+      #     deployment: my-app-frontend
+      #     container: my-app-frontend
+      #     image: ${{ secrets.DOCKER_IMAGE_FRONTEND }}
