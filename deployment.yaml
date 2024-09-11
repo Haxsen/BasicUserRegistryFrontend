@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userregfrontenddeploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: userregfrontend
+  template:
+    metadata:
+      labels:
+        app: userregfrontend
+    spec:
+      containers:
+      - name: userregfrontendcontainer
+        image: ${{ secrets.DOCKER_IMAGE_FRONTEND }}
+        ports:
+        - containerPort: 80
