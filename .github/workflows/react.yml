@@ -31,3 +31,4 @@ jobs:
           aws eks update-kubeconfig --name BasicUserRegistryFrontendEKS --role-arn ${{ secrets.EKS_IAM_ROLE_ARN }}
           kubectl apply -f deployment.yaml
           kubectl rollout status deployment/userregfrontenddeploy
+##
