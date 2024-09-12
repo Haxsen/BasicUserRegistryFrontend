@@ -24,5 +24,6 @@ jobs:
           AWS_DEFAULT_REGION: ap-southeast-1
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
+          echo "$KUBECONFIG" > kubeconfig
           kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/userregfrontenddeploy
