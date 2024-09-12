@@ -11,15 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push image
-        run: |
-          docker build -t ${{ secrets.DOCKER_IMAGE_FRONTEND }} .
-          docker push ${{ secrets.DOCKER_IMAGE_FRONTEND }}
       - name: Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
