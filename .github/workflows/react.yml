@@ -25,5 +25,6 @@ jobs:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
           echo "$KUBECONFIG" > kubeconfig
+          export KUBECONFIG=$(pwd)/kubeconfig
           kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/userregfrontenddeploy
